@@ -48,21 +48,25 @@ namespace RUTimetable
 			var values = new List<KeyValuePair<string, string>>();
 			TimeTableParser temp = new TimeTableParser();
 			var acc =temp.GetAcronyms();
-			var formContent = new FormUrlEncodedContent(new[]
-			{
-				new KeyValuePair<string, string>("mnemonic[]", acc.Count>0?acc[0]:"")
-            });
-			var myHttpClient = new HttpClient();
-			var responsefromserver = await myHttpClient.PostAsync(URL, formContent);
-			client.Dispose();
-			var stringContent = await responsefromserver.Content.ReadAsStringAsync();
-			var html = new HtmlDocument();
-			html.LoadHtml(stringContent);
-			var root = html.DocumentNode;
-			var nodes = root.Descendants();
-			var totalNodes = nodes.Count();
-		    var table = root.Descendants("table").ToArray();
-			var o = 1;
+            for (int i = 0; i < acc.Count; i++)
+            {
+                var formContent = new FormUrlEncodedContent(new[]
+                {
+                new KeyValuePair<string, string>("mnemonic[]", acc.Count>0?acc[i]:"")
+                });
+                var myHttpClient = new HttpClient();
+                var responsefromserver = await myHttpClient.PostAsync(URL, formContent);
+                client.Dispose();
+                var stringContent = await responsefromserver.Content.ReadAsStringAsync();
+                var html = new HtmlDocument();
+                html.LoadHtml(stringContent);
+                var root = html.DocumentNode;
+                var nodes = root.Descendants();
+                var totalNodes = nodes.Count();
+                var table = root.Descendants("table").ToArray();
+                // Check the format returned by the website 
+                //Got no internet connection right now will check later
+            }
 		}
 		/// <summary>
 		/// Gets the timnetable from the time table website this is the brain of the App everything depends of on this fetching the data correctly.

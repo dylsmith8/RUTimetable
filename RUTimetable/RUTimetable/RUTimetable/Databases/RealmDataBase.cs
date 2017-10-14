@@ -79,7 +79,10 @@ namespace RUTimetable
 			db.Refresh();
 			return Student;
 		}
-
+        /// <summary>
+        /// Deprecated 
+        /// To be removed
+        /// </summary>
 		public void RemoveAllLeaveOne()
 		{
 			var all = db.All<Student>().ToList();
@@ -122,6 +125,12 @@ namespace RUTimetable
 				student.Reminders.ToList().Add(reminder); 
 			});
 		}
+        /// <summary>
+        /// returns a list of subjects 
+        /// </summary>
+        /// <param name="day"></param>
+        /// <param name="semester"></param>
+        /// <returns></returns>
 		public IEnumerable<Subject> GetSubjects(string day, int semester)
 		{
 			var temp = db.All<Student>().ElementAt(0);

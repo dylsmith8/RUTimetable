@@ -15,6 +15,12 @@ namespace RUTimetable
 		{
 			//ToDo 
 		}
+        /// <summary>
+        /// Responsible for migrating any Changes made
+        /// to the Data model ensuring that the users data is not lost 
+        /// because of this
+        /// </summary>
+        /// <returns> a new Realm Configuration with the updated Data Model</returns>
 		public RealmConfiguration HandleChanges()
 		{
 			//Todo complete the Migration
